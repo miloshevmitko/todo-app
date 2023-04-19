@@ -1,0 +1,1 @@
+export { config as appConfig } from './app.config';
