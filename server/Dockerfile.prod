@@ -1,0 +1,32 @@
+FROM node:18-alpine
+
+# Create directory to hold the application code inside the image
+WORKDIR /usr/app
+
+# Install app dependencies
+COPY ./server/package.json .
+COPY ./server/yarn.lock .
+RUN yarn
+
+ARG SERVER_NAMESPACE
+ENV SERVER_NAMESPACE $SERVER_NAMESPACE
+ARG SERVER_PORT
+ENV SERVER_PORT $SERVER_PORT
+ARG MONGODB_CONNECTION_URL
+ENV MONGODB_CONNECTION_URL $MONGODB_CONNECTION_URL
+ARG MONGODB_DB_NAME
+ENV MONGODB_DB_NAME $MONGODB_DB_NAME
+ENV NODE_ENV production
+
+# Fix for module resolver throwing errors while trying to resolve .bin in node_modules
+RUN echo "export PATH=/usr/app/node_modules/.bin:${PATH}" >> /root/.profile
+
+# Build
+COPY ./server/babel.config.json .
+COPY ./server/tsconfig.json .
+COPY ./server/src ./src
+RUN yarn build
+
+EXPOSE ${SERVER_PORT}
+
+CMD ["yarn", "start:prod"]

@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  todo-app-server:
+    container_name: todo-app-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=9001
+    volumes:
+      - ./:/usr/app/dev
+      - /usr/app/dev/node_modules/
+    ports:
+      - 9001:9001
+    env_file:
+      - .env

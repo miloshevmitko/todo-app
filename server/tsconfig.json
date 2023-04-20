@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "outDir": "./build",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@todo-app/server/common": ["./src/common/index.ts"],
+      "@todo-app/server/configs": ["./src/configs/index.ts"],
+      "@todo-app/server/database": ["./src/database/index.ts"],
+      "@todo-app/server/utils": ["./src/utils/index.ts"],
+    },
+    "typeRoots": ["./node_modules/@types", "./src/typings"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "build"]
+}

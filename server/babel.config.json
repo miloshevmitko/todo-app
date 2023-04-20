@@ -1,0 +1,28 @@
+{
+  "presets": [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "18"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "extensions": [".ts"],
+        "alias": {
+          "@todo-app/server/common": "./src/common/index.js",
+          "@todo-app/server/configs": "./src/configs/index.js",
+          "@todo-app/server/database": "./src/database/index.js",
+          "@todo-app/server/utils": "./src/utils/index.js"
+        }
+      }
+    ]
+  ]
+}
