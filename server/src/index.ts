@@ -1,8 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { serverConfig, mongoDbConfig } from './configs';
+import morgan from 'morgan';
+import { globalConfig, serverConfig, mongoDbConfig } from './configs';
 import { mongoConnection } from './database';
+import { requestId } from './middleware';
 import { onProcessEndHandlerProvider } from './utils/onProcessEndHandler';
 
 async function init() {
@@ -11,6 +13,10 @@ async function init() {
 
     app.use(express.json());
     app.use(cors());
+    app.use(requestId);
+
+    const morganFormat = `:res[${globalConfig.requestIdHeaderKey}] - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]`;
+    app.use(morgan(morganFormat));
 
     import('./router').then((module) => {
       return app.use(`/api/${serverConfig.namespace}`, module.router);

@@ -20,6 +20,7 @@
           "@todo-app/server/common": "./src/common/index.js",
           "@todo-app/server/configs": "./src/configs/index.js",
           "@todo-app/server/database": "./src/database/index.js",
+          "@todo-app/server/middleware": "./src/middleware/index.js",
           "@todo-app/server/utils": "./src/utils/index.js"
         }
       }

@@ -31,7 +31,8 @@ Once the server is running (either with docker or standalone) it will support li
 ## Technical debt
 
 - It's missing a proper error handling and logging.
-- A few more tests are required.
+- More unit tests are required and integration tests.
+- Add automated linter and code formatter on commit.
 
 ## Available Scripts
 

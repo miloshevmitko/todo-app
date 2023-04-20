@@ -14,6 +14,7 @@
       "@todo-app/server/common": ["./src/common/index.ts"],
       "@todo-app/server/configs": ["./src/configs/index.ts"],
       "@todo-app/server/database": ["./src/database/index.ts"],
+      "@todo-app/server/middleware": ["./src/middleware/index.ts"],
       "@todo-app/server/utils": ["./src/utils/index.ts"],
     },
     "typeRoots": ["./node_modules/@types", "./src/typings"]
