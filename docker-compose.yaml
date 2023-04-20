@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  app-client:
+    container_name: todo-app-client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile.prod
+      args:
+        - PORT=3000
+        - REACT_APP_API_BASE_URL=http://localhost:9001/api/todo-app/v1
+    ports:
+      - 3000:3000
+  app-server:
+    container_name: todo-app-server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile.prod
+      args:
+        - SERVER_NAMESPACE=todo-app
+        - SERVER_PORT=9001
+        - MONGODB_CONNECTION_URL=mongodb+srv://todo-app-developer:MVy2nQqcRmS@testcluster.idgaf.mongodb.net/?retryWrites=true&w=majority
+        - MONGODB_DB_NAME=todoAppDb
+    ports:
+      - 9001:9001

@@ -1,0 +1,24 @@
+FROM node:18-alpine
+
+# Create directory to hold the application code inside the image
+WORKDIR /usr/app
+
+# Install app dependencies
+COPY ./client/package.json .
+COPY ./client/yarn.lock .
+RUN yarn
+
+ARG REACT_APP_API_BASE_URL
+ENV REACT_APP_API_BASE_URL $REACT_APP_API_BASE_URL
+ENV NODE_ENV production
+
+# Build
+COPY ./client/public ./public
+COPY ./client/src ./src
+COPY ./client/tsconfig.json ./
+COPY ./client/craco.config.js ./
+RUN yarn build
+
+EXPOSE ${PORT}
+
+CMD ["npx", "serve", "build"]
